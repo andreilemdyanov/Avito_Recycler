@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--CardView dimens-->
     <dimen name="width_card">170dp</dimen>
     <dimen name="height_card">170dp</dimen>
+    <dimen name="card_elevation">10dp</dimen>
+    <dimen name="stroke_width">2dp</dimen>
+    <dimen name="corner_radius">6dp</dimen>
+    <!--Margins-->
+    <dimen name="small_margin">2dp</dimen>
+    <dimen name="normal_margin">8dp</dimen>
+    <!--Text Size-->
+    <dimen name="text_size">50sp</dimen>
 </resources>

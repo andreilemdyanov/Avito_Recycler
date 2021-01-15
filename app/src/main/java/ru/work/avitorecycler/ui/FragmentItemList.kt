@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import ru.work.avitorecycler.ItemsAdapter
 import ru.work.avitorecycler.R
@@ -15,13 +15,8 @@ import ru.work.avitorecycler.viewmodel.ItemsViewModel
 class FragmentItemList : Fragment(R.layout.fragment_item_list) {
     private var _binding: FragmentItemListBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: ItemsViewModel by viewModels()
     lateinit var adapter: ItemsAdapter
-    lateinit var viewModel: ItemsViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ItemsViewModel::class.java)
-    }
 
     override fun onStart() {
         super.onStart()

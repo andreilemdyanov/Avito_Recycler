@@ -3,7 +3,11 @@ package ru.work.avitorecycler.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.*
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.work.avitorecycler.data.Item
 
 
@@ -16,7 +20,7 @@ class ItemsViewModel : ViewModel() {
     private var id = defCount + 1
 
     init {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             _mutableItemsList.postValue(generateDefaultItems(defCount))
             while (true) {
                 delay(5000)

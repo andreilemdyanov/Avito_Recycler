@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import ru.work.avitorecycler.ItemsAdapter
-import ru.work.avitorecycler.viewmodel.ItemsViewModel
 import ru.work.avitorecycler.R
-import ru.work.avitorecycler.data.Item
 import ru.work.avitorecycler.databinding.FragmentItemListBinding
+import ru.work.avitorecycler.viewmodel.ItemsViewModel
 
-class FragmentItemList : Fragment(R.layout.fragment_item_list), Observer<List<Item>> {
+class FragmentItemList : Fragment(R.layout.fragment_item_list) {
     private var _binding: FragmentItemListBinding? = null
     private val binding get() = _binding!!
     lateinit var adapter: ItemsAdapter
@@ -27,7 +25,9 @@ class FragmentItemList : Fragment(R.layout.fragment_item_list), Observer<List<It
 
     override fun onStart() {
         super.onStart()
-        viewModel.itemsList.observe(this.viewLifecycleOwner, this)
+        viewModel.itemsList.observe(this.viewLifecycleOwner, {
+            adapter.submitList(viewModel.itemsList.value)
+        })
     }
 
     override fun onCreateView(
@@ -61,9 +61,5 @@ class FragmentItemList : Fragment(R.layout.fragment_item_list), Observer<List<It
     companion object {
         @JvmStatic
         fun newInstance() = FragmentItemList()
-    }
-
-    override fun onChanged(t: List<Item>?) {
-        adapter.submitList(viewModel.itemsList.value)
     }
 }
